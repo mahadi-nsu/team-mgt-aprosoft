@@ -113,6 +113,40 @@ export default function TeamsPage() {
     });
   };
 
+  const handleTeamDelete = (teamId: string) => {
+    // Remove the deleted team from both teams and filteredTeams
+    setTeams((prev) => prev.filter((team) => team._id !== teamId));
+    setFilteredTeams((prev) => prev.filter((team) => team._id !== teamId));
+    // Remove from selected teams if it was selected
+    setSelectedTeams((prev) => prev.filter((id) => id !== teamId));
+    // Remove from expanded teams if it was expanded
+    setExpandedTeams((prev) => {
+      const newSet = new Set(prev);
+      newSet.delete(teamId);
+      return newSet;
+    });
+  };
+
+  const handleMemberUpdate = async (teamId: string) => {
+    // Fetch updated team data and update the teams state
+    try {
+      const response = await fetch(`/api/teams/${teamId}`);
+      const data = await response.json();
+
+      if (data.success) {
+        // Update the specific team in both teams and filteredTeams
+        setTeams((prev) =>
+          prev.map((team) => (team._id === teamId ? data.data : team))
+        );
+        setFilteredTeams((prev) =>
+          prev.map((team) => (team._id === teamId ? data.data : team))
+        );
+      }
+    } catch (error) {
+      console.error("Failed to refresh team data:", error);
+    }
+  };
+
   const handleBulkDelete = async () => {
     if (selectedTeams.length === 0) return;
 
@@ -296,6 +330,8 @@ export default function TeamsPage() {
                     onTeamReorder={handleTeamReorder}
                     onApprovalChange={handleApprovalChange}
                     onBulkDelete={handleBulkDelete}
+                    onTeamDelete={handleTeamDelete}
+                    onMemberUpdate={handleMemberUpdate}
                     userRole={session.user?.role as string}
                   />
                 </div>

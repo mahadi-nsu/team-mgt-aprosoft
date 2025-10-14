@@ -35,6 +35,8 @@ interface TeamTableProps {
     currentStatus: string
   ) => void;
   onBulkDelete: () => void;
+  onTeamDelete: (teamId: string) => void;
+  onMemberUpdate: (teamId: string) => void;
   userRole: string;
 }
 
@@ -48,6 +50,8 @@ export default function TeamTable({
   onTeamReorder,
   onApprovalChange,
   onBulkDelete,
+  onTeamDelete,
+  onMemberUpdate,
   userRole,
 }: TeamTableProps) {
   const router = useRouter();
@@ -69,8 +73,8 @@ export default function TeamTable({
 
       if (data.success) {
         toast.success("Team deleted successfully");
-        // Refresh the page to update the list
-        window.location.reload();
+        // Update the parent component's state instead of refreshing
+        onTeamDelete(teamId);
       } else {
         toast.error(data.error || "Failed to delete team");
       }
@@ -282,10 +286,7 @@ export default function TeamTable({
                 <MemberRows
                   teamId={team._id}
                   members={team.members}
-                  onMemberUpdate={() => {
-                    // Refresh teams data
-                    window.location.reload();
-                  }}
+                  onMemberUpdate={() => onMemberUpdate(team._id)}
                 />
               )}
             </React.Fragment>
