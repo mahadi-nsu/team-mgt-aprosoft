@@ -169,8 +169,20 @@ export default function TeamsPage() {
 
       if (data.success) {
         toast.success(data.message);
+        // Remove deleted teams from state instead of refetching
+        setTeams((prev) =>
+          prev.filter((team) => !selectedTeams.includes(team._id))
+        );
+        setFilteredTeams((prev) =>
+          prev.filter((team) => !selectedTeams.includes(team._id))
+        );
         setSelectedTeams([]);
-        fetchTeams(); // Refresh the list
+        // Clear expanded teams that were deleted
+        setExpandedTeams((prev) => {
+          const newSet = new Set(prev);
+          selectedTeams.forEach((teamId) => newSet.delete(teamId));
+          return newSet;
+        });
       } else {
         toast.error(data.error || "Failed to delete teams");
       }
