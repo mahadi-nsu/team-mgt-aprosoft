@@ -21,8 +21,8 @@ A comprehensive team management application built with Next.js 15, MongoDB, and 
    Create a `.env.local` file in the root directory:
 
    ```env
-   MONGODB_URI=mongodb+srv://your-username:your-password@cluster.mongodb.net/team-management?retryWrites=true&w=majority
-   NEXTAUTH_SECRET=your-secret-key-here
+   MONGODB_URI=mongodb+srv://mahadinsucse_db_user:dd9OAgUxL1Gr5tAV@cluster0.xoqesm7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+   NEXTAUTH_SECRET=PKJO/0axdc9U2q0oAYhd2GyIQnO2m3eJ+cnDGtvOrTY=
    NEXTAUTH_URL=http://localhost:3000
    ```
 
