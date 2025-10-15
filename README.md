@@ -2,6 +2,81 @@
 
 A comprehensive team management application built with Next.js 15, MongoDB, and Bootstrap. This application provides CRUD operations for teams, role-based authentication, and advanced features like drag-and-drop reordering and three-state approval workflow.
 
+## Setup
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd aprosoft
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   yarn install
+   ```
+
+3. **Set up environment variables**
+   Create a `.env.local` file in the root directory:
+
+   ```env
+   MONGODB_URI=mongodb+srv://your-username:your-password@cluster.mongodb.net/team-management?retryWrites=true&w=majority
+   NEXTAUTH_SECRET=your-secret-key-here
+   NEXTAUTH_URL=http://localhost:3000
+   ```
+
+4. **Start the development server**
+
+   ```bash
+   yarn dev
+   ```
+
+5. **Open your browser**
+   Navigate to `http://localhost:3000`
+
+## Data Schema
+
+### Users Collection
+
+```json
+{
+  "_id": { "$oid": "68ee52f538c627d7683a95fe" },
+  "email": "manager@demo.com",
+  "password": "$2b$12$wxxzqH6pKeNNhrDUmSmDk.bvr0lPs9ZJPASZE1P3cQc1UhhmQUHqa",
+  "role": "manager",
+  "name": "John Manager",
+  "createdAt": { "$date": { "$numberLong": "1760449269502" } },
+  "updatedAt": { "$date": { "$numberLong": "1760449269502" } },
+  "__v": { "$numberInt": "0" }
+}
+```
+
+### Teams Collection
+
+```json
+{
+  "_id": { "$oid": "68ee52f638c627d7683a9607" },
+  "teamName": "Team Beta",
+  "teamDescription": "Backend development team",
+  "approvedByManager": "pending",
+  "approvedByDirector": "approved",
+  "members": [
+    {
+      "name": "Charlie Brown test",
+      "gender": "Male",
+      "dateOfBirth": { "$date": { "$numberLong": "714268800000" } },
+      "contactNo": "5555555555",
+      "_id": { "$oid": "68ee8d8e37f275b7d0471f68" }
+    }
+  ],
+  "displayOrder": { "$numberInt": "0" },
+  "createdAt": { "$date": { "$numberLong": "1760449270437" } },
+  "updatedAt": { "$date": { "$numberLong": "1760464270980" } },
+  "__v": { "$numberInt": "0" }
+}
+```
+
 ## Features
 
 ### Core Functionality
@@ -39,46 +114,7 @@ A comprehensive team management application built with Next.js 15, MongoDB, and 
 
 - Node.js 18+
 - MongoDB Atlas account or local MongoDB instance
-- npm or yarn package manager
-
-## Installation
-
-1. **Clone the repository**
-
-   ```bash
-   git clone <repository-url>
-   cd aprosoft
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables**
-   Create a `.env.local` file in the root directory:
-
-   ```env
-   MONGODB_URI=mongodb+srv://your-username:your-password@cluster.mongodb.net/team-management?retryWrites=true&w=majority
-   NEXTAUTH_SECRET=your-secret-key-here
-   NEXTAUTH_URL=http://localhost:3000
-   ```
-
-4. **Seed the database**
-
-   ```bash
-   npm run seed
-   ```
-
-5. **Start the development server**
-
-   ```bash
-   npm run dev
-   ```
-
-6. **Open your browser**
-   Navigate to `http://localhost:3000`
+- yarn package manager
 
 ## Demo Credentials
 
