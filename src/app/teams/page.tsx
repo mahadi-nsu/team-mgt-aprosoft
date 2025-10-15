@@ -269,7 +269,7 @@ export default function TeamsPage() {
               <div className="d-flex align-items-center">
                 <h4 className="mb-0 me-3">Teams</h4>
                 <span className="badge bg-light text-dark">
-                  {session.user?.role?.toUpperCase()}
+                  {(session.user as any)?.role?.toUpperCase()}
                 </span>
               </div>
               <div className="d-flex align-items-center gap-3">
@@ -301,7 +301,7 @@ export default function TeamsPage() {
                   Welcome, {session.user?.name}
                 </span>
                 <span className="badge bg-light text-dark">
-                  {session.user?.role?.toUpperCase()}
+                  {(session.user as any)?.role?.toUpperCase()}
                 </span>
               </div>
             </div>
@@ -349,7 +349,7 @@ export default function TeamsPage() {
                       onBulkDelete={handleBulkDelete}
                       onTeamDelete={handleTeamDelete}
                       onMemberUpdate={handleMemberUpdate}
-                      userRole={session.user?.role as string}
+                      userRole={(session.user as any)?.role as string}
                     />
                   </div>
                 )}
