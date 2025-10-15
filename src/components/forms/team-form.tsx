@@ -223,10 +223,6 @@ export default function TeamForm({ teamId, isEdit = false }: TeamFormProps) {
     }
   };
 
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-
   return (
     <div className="container-fluid px-0">
       {/* Header */}
@@ -260,110 +256,118 @@ export default function TeamForm({ teamId, isEdit = false }: TeamFormProps) {
       <div className="container-fluid">
         <div className="row justify-content-center">
           <div className="col-12 col-xl-8">
-            <div className="card">
-              <div className="card-body p-4">
-                {/* Team Name */}
-                <div className="mb-4">
-                  <label htmlFor="teamName" className="form-label fw-medium">
-                    Team Name *
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="teamName"
-                    value={formData.teamName}
-                    onChange={(e) =>
-                      handleInputChange("teamName", e.target.value)
-                    }
-                    placeholder="Enter team name"
-                    disabled={saving}
-                  />
-                </div>
-
-                {/* Team Description */}
-                <div className="mb-4">
-                  <label
-                    htmlFor="teamDescription"
-                    className="form-label fw-medium"
-                  >
-                    Team Description *
-                  </label>
-                  <textarea
-                    className="form-control"
-                    id="teamDescription"
-                    rows={3}
-                    value={formData.teamDescription}
-                    onChange={(e) =>
-                      handleInputChange("teamDescription", e.target.value)
-                    }
-                    placeholder="Enter team description"
-                    disabled={saving}
-                  />
-                </div>
-
-                {/* Team Members */}
-                <div className="mb-4">
-                  <label className="form-label fw-medium">Team Member *</label>
-
-                  {/* Member Table Header */}
-                  <div className="table-responsive">
-                    <table className="table table-bordered">
-                      <thead className="table-light">
-                        <tr>
-                          <th>Name</th>
-                          <th>Gender</th>
-                          <th>Date of Birth</th>
-                          <th>Contact No.</th>
-                          <th style={{ width: "100px" }}>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {formData.members.map((member, index) => (
-                          <TeamMemberRow
-                            key={index}
-                            member={member}
-                            index={index}
-                            onChange={handleMemberChange}
-                            onRemove={handleRemoveMember}
-                            disabled={saving}
-                          />
-                        ))}
-                      </tbody>
-                    </table>
+            {loading ? (
+              <div className="d-flex justify-content-center align-items-center py-5">
+                <LoadingSpinner />
+              </div>
+            ) : (
+              <div className="card">
+                <div className="card-body p-4">
+                  {/* Team Name */}
+                  <div className="mb-4">
+                    <label htmlFor="teamName" className="form-label fw-medium">
+                      Team Name *
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="teamName"
+                      value={formData.teamName}
+                      onChange={(e) =>
+                        handleInputChange("teamName", e.target.value)
+                      }
+                      placeholder="Enter team name"
+                      disabled={saving}
+                    />
                   </div>
 
-                  {/* Add New Member Button */}
-                  <button
-                    type="button"
-                    className="btn btn-warning"
-                    onClick={handleAddMember}
-                    disabled={saving}
-                  >
-                    Add New Member
-                  </button>
-                </div>
+                  {/* Team Description */}
+                  <div className="mb-4">
+                    <label
+                      htmlFor="teamDescription"
+                      className="form-label fw-medium"
+                    >
+                      Team Description *
+                    </label>
+                    <textarea
+                      className="form-control"
+                      id="teamDescription"
+                      rows={3}
+                      value={formData.teamDescription}
+                      onChange={(e) =>
+                        handleInputChange("teamDescription", e.target.value)
+                      }
+                      placeholder="Enter team description"
+                      disabled={saving}
+                    />
+                  </div>
 
-                {/* Action Buttons */}
-                <div className="d-flex gap-3">
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={handleSave}
-                    disabled={saving}
-                  >
-                    {saving ? "Saving..." : "Save"}
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={handleExit}
-                    disabled={saving}
-                  >
-                    Exit
-                  </button>
+                  {/* Team Members */}
+                  <div className="mb-4">
+                    <label className="form-label fw-medium">
+                      Team Member *
+                    </label>
+
+                    {/* Member Table Header */}
+                    <div className="table-responsive">
+                      <table className="table table-bordered">
+                        <thead className="table-light">
+                          <tr>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Date of Birth</th>
+                            <th>Contact No.</th>
+                            <th style={{ width: "100px" }}>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {formData.members.map((member, index) => (
+                            <TeamMemberRow
+                              key={index}
+                              member={member}
+                              index={index}
+                              onChange={handleMemberChange}
+                              onRemove={handleRemoveMember}
+                              disabled={saving}
+                            />
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Add New Member Button */}
+                    <button
+                      type="button"
+                      className="btn btn-warning"
+                      onClick={handleAddMember}
+                      disabled={saving}
+                    >
+                      Add New Member
+                    </button>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="d-flex gap-3">
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={handleSave}
+                      disabled={saving}
+                    >
+                      {saving ? "Saving..." : "Save"}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={handleExit}
+                      disabled={saving}
+                    >
+                      Exit
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

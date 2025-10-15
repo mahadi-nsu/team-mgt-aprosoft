@@ -250,7 +250,7 @@ export default function TeamsPage() {
     }
   };
 
-  if (status === "loading" || loading) {
+  if (status === "loading") {
     return <LoadingSpinner />;
   }
 
@@ -331,22 +331,28 @@ export default function TeamsPage() {
             {/* Teams Table */}
             <div className="row">
               <div className="col-12">
-                <div className="table-responsive">
-                  <TeamTable
-                    teams={filteredTeams}
-                    selectedTeams={selectedTeams}
-                    expandedTeams={expandedTeams}
-                    onTeamSelect={handleTeamSelect}
-                    onSelectAll={handleSelectAll}
-                    onTeamExpand={handleTeamExpand}
-                    onTeamReorder={handleTeamReorder}
-                    onApprovalChange={handleApprovalChange}
-                    onBulkDelete={handleBulkDelete}
-                    onTeamDelete={handleTeamDelete}
-                    onMemberUpdate={handleMemberUpdate}
-                    userRole={session.user?.role as string}
-                  />
-                </div>
+                {loading ? (
+                  <div className="d-flex justify-content-center align-items-center py-5">
+                    <LoadingSpinner />
+                  </div>
+                ) : (
+                  <div className="table-responsive">
+                    <TeamTable
+                      teams={filteredTeams}
+                      selectedTeams={selectedTeams}
+                      expandedTeams={expandedTeams}
+                      onTeamSelect={handleTeamSelect}
+                      onSelectAll={handleSelectAll}
+                      onTeamExpand={handleTeamExpand}
+                      onTeamReorder={handleTeamReorder}
+                      onApprovalChange={handleApprovalChange}
+                      onBulkDelete={handleBulkDelete}
+                      onTeamDelete={handleTeamDelete}
+                      onMemberUpdate={handleMemberUpdate}
+                      userRole={session.user?.role as string}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
