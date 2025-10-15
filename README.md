@@ -7,8 +7,8 @@ A comprehensive team management application built with Next.js 15, MongoDB, and 
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
-   cd aprosoft
+   git clone https://github.com/mahadi-nsu/team-mgt-aprosoft.git
+   cd team-mgt-aprosoft
    ```
 
 2. **Install dependencies**
